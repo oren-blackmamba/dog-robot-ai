@@ -15,7 +15,23 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Run unit tests
+      - name: Run core unit tests
         env:
           PYTHONPATH: src
-        run: python -m unittest discover -s tests -v
+        run: python -m unittest discover -s tests -p "test_*.py" -v
+
+  mujoco-smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install package and MuJoCo
+        run: python -m pip install -e ".[simulation]"
+      - name: Validate model and step physics
+        env:
+          PYTHONPATH: src
+        run: python -m unittest discover -s tests -p "test_mujoco_model.py" -v
