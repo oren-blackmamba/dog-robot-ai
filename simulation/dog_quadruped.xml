@@ -1,0 +1,67 @@
+<mujoco model="dog_robot_ai_quadruped">
+  <compiler angle="degree" autolimits="true"/>
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast"/>
+  <visual>
+    <global offwidth="1280" offheight="800"/>
+  </visual>
+  <default>
+    <joint damping="2" armature="0.02" limited="true" range="-45 45"/>
+    <geom friction="1.0 0.1 0.1" condim="3" rgba="0.22 0.55 0.82 1"/>
+    <motor ctrllimited="true" ctrlrange="-12 12"/>
+  </default>
+  <worldbody>
+    <light pos="0 0 3" dir="0 0 -1"/>
+    <geom name="floor" type="plane" size="5 5 0.1" rgba="0.18 0.2 0.23 1"/>
+    <body name="torso" pos="0 0 0.48">
+      <freejoint name="root"/>
+      <geom name="body" type="box" size="0.24 0.12 0.07" mass="3.0" rgba="0.15 0.65 0.48 1"/>
+      <geom name="head" type="sphere" pos="0.28 0 0.02" size="0.075" mass="0.25" rgba="0.95 0.72 0.2 1"/>
+      <body name="front_left_upper" pos="0.16 0.09 -0.03">
+        <joint name="front_left_hip" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0.01 0 -0.19" size="0.035" mass="0.35"/>
+        <body name="front_left_lower" pos="0.01 0 -0.19">
+          <joint name="front_left_knee" axis="0 1 0" range="-80 10"/>
+          <geom type="capsule" fromto="0 0 0 0 0 -0.18" size="0.025" mass="0.25"/>
+          <geom name="front_left_foot" type="sphere" pos="0 0 -0.18" size="0.035" mass="0.08"/>
+        </body>
+      </body>
+      <body name="front_right_upper" pos="0.16 -0.09 -0.03">
+        <joint name="front_right_hip" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 0.01 0 -0.19" size="0.035" mass="0.35"/>
+        <body name="front_right_lower" pos="0.01 0 -0.19">
+          <joint name="front_right_knee" axis="0 1 0" range="-80 10"/>
+          <geom type="capsule" fromto="0 0 0 0 0 -0.18" size="0.025" mass="0.25"/>
+          <geom name="front_right_foot" type="sphere" pos="0 0 -0.18" size="0.035" mass="0.08"/>
+        </body>
+      </body>
+      <body name="rear_left_upper" pos="-0.16 0.09 -0.03">
+        <joint name="rear_left_hip" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 -0.01 0 -0.19" size="0.035" mass="0.35"/>
+        <body name="rear_left_lower" pos="-0.01 0 -0.19">
+          <joint name="rear_left_knee" axis="0 1 0" range="-80 10"/>
+          <geom type="capsule" fromto="0 0 0 0 0 -0.18" size="0.025" mass="0.25"/>
+          <geom name="rear_left_foot" type="sphere" pos="0 0 -0.18" size="0.035" mass="0.08"/>
+        </body>
+      </body>
+      <body name="rear_right_upper" pos="-0.16 -0.09 -0.03">
+        <joint name="rear_right_hip" axis="0 1 0"/>
+        <geom type="capsule" fromto="0 0 0 -0.01 0 -0.19" size="0.035" mass="0.35"/>
+        <body name="rear_right_lower" pos="-0.01 0 -0.19">
+          <joint name="rear_right_knee" axis="0 1 0" range="-80 10"/>
+          <geom type="capsule" fromto="0 0 0 0 0 -0.18" size="0.025" mass="0.25"/>
+          <geom name="rear_right_foot" type="sphere" pos="0 0 -0.18" size="0.035" mass="0.08"/>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+  <actuator>
+    <position name="fl_hip_hold" joint="front_left_hip" kp="8" ctrlrange="-20 20"/>
+    <position name="fl_knee_hold" joint="front_left_knee" kp="8" ctrlrange="-20 20"/>
+    <position name="fr_hip_hold" joint="front_right_hip" kp="8" ctrlrange="-20 20"/>
+    <position name="fr_knee_hold" joint="front_right_knee" kp="8" ctrlrange="-20 20"/>
+    <position name="rl_hip_hold" joint="rear_left_hip" kp="8" ctrlrange="-20 20"/>
+    <position name="rl_knee_hold" joint="rear_left_knee" kp="8" ctrlrange="-20 20"/>
+    <position name="rr_hip_hold" joint="rear_right_hip" kp="8" ctrlrange="-20 20"/>
+    <position name="rr_knee_hold" joint="rear_right_knee" kp="8" ctrlrange="-20 20"/>
+  </actuator>
+</mujoco>

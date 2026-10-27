@@ -4,13 +4,16 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "dog-robot-ai"
-version = "0.1.0"
-description = "A software-first foundation for an AI-powered robotic dog companion"
+version = "0.2.0"
+description = "A software-first AI companion dog brain with optional MuJoCo simulation"
 readme = "README.md"
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 authors = [{ name = "Oren Ohayon" }]
 dependencies = []
+
+[project.optional-dependencies]
+simulation = ["mujoco>=3.2"]
 
 [tool.setuptools]
 package-dir = {"" = "src"}
